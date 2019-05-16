@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+"http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	<constant name="struts.devMode" value="false"/>
+	<package name ="demo1" namespace="/"  extends="struts-default" >
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.wxl.interceptor.LoginInterceptor">
+				<param name="excludeMethods">login</param>
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+	
+		<action name="loginAction" class="com.wxl.action.LoginAction">
+			<result name="list">/WEB-INF/jsp/list.jsp</result>
+			<result name="login">/login.jsp</result>
+		</action>
+	</package>
+	<package name="demo2" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.wxl.interceptor.LoginInterceptor">
+				<param name="excludeMethods">login</param>
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+	
+		<action name="productAction" class="com.wxl.action.ProductAction">
+			<result name="addList">/WEB-INF/jsp/add.jsp</result>
+			<result name="list">/WEB-INF/jsp/list.jsp</result>
+			<result name="delete">/WEB-INF/jsp/list.jsp</result>
+			<result name="update">/WEB-INF/jsp/update.jsp</result>
+			<result name="updateSc">/WEB-INF/jsp/list.jsp</result>
+		</action>
+	</package>
+</struts>
